@@ -4,26 +4,82 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- CSS only -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
     <link rel="stylesheet" href="css/styles.css">
     <title>BoomBang SPA example</title>
 </head>
 <body>
     <section id="home">
         <header>
-            <a href="#"><img class="icon" src="" alt="Logo"></a>
+            <a href="#"><img class="icon" src="img/logo.png" alt="Logo"></a>
             <ul id="menu">
-                <li><a href="#home">Inicio</a></li>
+                <li><a href="#home">inicio</a></li>
                 <li><a href="#about">bienvenida</a></li>
-                <li><a href="#credits">Creditos</a></li>
-                <li><a href="#contact">Contacto</a></li>
+                <li><a href="#credits">creditos</a></li>
+                <li><a href="#contact">contacto</a></li>
             </ul>
         </header>
         <div class="homeBody">
-            <h1>This is home</h1>
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-6 d-flex justify-content-center align-items-center">
+                        <img class="imgCloud" src="img/cloud.png" alt="">
+                        <img class="imgCloud" src="img/cloud.png" alt="">
+                        <img class="imgCloud" src="img/cloud.png" alt="">
+                        <img class="imgCloud" src="img/cloud.png" alt="">
+                        <img class="imgCloud" src="img/cloud.png" alt="">
+                        <img class="imgCloud" src="img/cloud.png" alt="">
+                        <img class="kekoBienvenida" src="img/rastaFly.png" alt="">
+                    </div>
+                    <div class="col-6">
+                        <h1>BoomBang</h1>
+                    </div>
+                </div>
+            </div>
         </div>
     </section>
     <section id ="about">This is about</section>
     <section id ="credits">Creditos</section>
     <section id ="contact">Contacto</section>
+
+    <!-- JavaScript Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa" crossorigin="anonymous"></script>
+    <script>
+
+        //document.querySelector('.imgCloud').style.width = ""+ aleatorio + "px";
+
+        var nubes = document.querySelectorAll('.imgCloud');
+        var aux = 1;
+
+        for(var i = 0; i< nubes.length; i++){
+            var nube = nubes[i];
+
+            aleatorio_tamano = Math.floor(Math.random()*250) + 100;
+            random_position_cloud_x = Math.floor(Math.random()*700)+150;
+            random_position_cloud_y = Math.floor(Math.random()*500)+1;
+
+    
+            nube.style.width = ""+aleatorio_tamano+"px";
+
+            random_lado_position_x = Math.floor(Math.random()*2)+1;
+
+            aux = aux + 1;
+
+            if(random_lado_position_x>1){
+                nube.style.transform = "translateX("+random_position_cloud_x+"px)";
+            }else{
+                nube.style.transform = "translateX(-"+random_position_cloud_x+"px)";
+            }
+
+ 
+        
+            if(aux>3){
+                nube.style.transform = "translateY("+random_position_cloud_y+"px)";
+                aux = 0;
+            }
+        }
+        console.log(aleatorio);
+    </script>
 </body>
 </html>
