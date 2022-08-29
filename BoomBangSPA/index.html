@@ -14,7 +14,7 @@
         <header>
             <a href="#"><img class="icon" src="img/logo.png" alt="Logo"></a>
             <ul id="menu">
-                <li><a href="#home">inicio</a></li>
+                <li><a href="#home" class="active">inicio</a></li>
                 <li><a href="#about">bienvenida</a></li>
                 <li><a href="#credits">creditos</a></li>
                 <li><a href="#contact">contacto</a></li>
@@ -30,10 +30,17 @@
                         <img class="imgCloud" src="img/cloud.png" alt="">
                         <img class="imgCloud" src="img/cloud.png" alt="">
                         <img class="imgCloud" src="img/cloud.png" alt="">
+                        <img class="imgCloud" src="img/cloud.png" alt="">
                         <img class="kekoBienvenida" src="img/rastaFly.png" alt="">
                     </div>
-                    <div class="col-6">
-                        <h1>BoomBang</h1>
+                    <div class="col-6 container-welcome d-flex justify-content-center align-items-center">
+                        <div class="container section-welcome d-flex flex-wrap justify-content-center align-items-center">
+                            <h1 class="text-white text-center p-2">Bienvenido a BoomBang!!</h1>
+                            <p class="text-white text-justify">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Molestiae quo nemo dolores, modi laborum blanditiis eveniet omnis voluptates magni laudantium earum minus, quibusdam cumque quis aut repellat! Inventore, impedit et!<br><br>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Id, eum ratione. Laudantium obcaecati eius at delectus dolor necessitatibus, porro voluptatem et id aut quasi quos, placeat in eligendi ducimus quia!</p>
+                            <div class="container-fluid d-flex justify-content-end">
+                                <input class="btn btn-dark mb-3 p-2" type="button" value="mas información">
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -50,36 +57,84 @@
         //document.querySelector('.imgCloud').style.width = ""+ aleatorio + "px";
 
         var nubes = document.querySelectorAll('.imgCloud');
-        var aux = 1;
+        var aux = 0;
+        var ban = 0;
+        var aux_cloud_x = 0;
+        var aleatorio_tamano = 0;
 
         for(var i = 0; i< nubes.length; i++){
             var nube = nubes[i];
-
-            aleatorio_tamano = Math.floor(Math.random()*250) + 100;
-            random_position_cloud_x = Math.floor(Math.random()*700)+150;
-            random_position_cloud_y = Math.floor(Math.random()*500)+1;
-
+            ban = 0;
     
+
+            aleatorio_tamano = Math.floor(Math.random()*450) + 100;
+            console.log('antes del bucle: '+aleatorio_tamano);
+
+            while(ban != 1){
+                if(aleatorio_tamano > (aux_cloud_x+100)){
+                    aux_cloud_x = aleatorio_tamano;
+                    ban = 1;
+                    console.log('el tamaño es:'+aleatorio_tamano);
+                }
+                else{
+                    if(aux_cloud_x > 420){ // 420 es el tamaño maximo para la burbuja nube
+                        aux_cloud_x = 0;
+                    }
+                    aleatorio_tamano = Math.floor(Math.random()*450) + 100;
+                }
+            }
+
             nube.style.width = ""+aleatorio_tamano+"px";
+            console.log('aux cloud X:'+aux_cloud_x);
+            
+            random_position_cloud_x = Math.floor(Math.random()*500)+150;
+            random_position_cloud_x += random_position_cloud_x + (aux_cloud_x-200);
+
+            random_position_cloud_y = Math.floor(Math.random()*500)+150;
+
 
             random_lado_position_x = Math.floor(Math.random()*2)+1;
 
-            aux = aux + 1;
 
-            if(random_lado_position_x>1){
-                nube.style.transform = "translateX("+random_position_cloud_x+"px)";
-            }else{
-                nube.style.transform = "translateX(-"+random_position_cloud_x+"px)";
+            if(aux < 2){
+                if(random_lado_position_x>1){
+                    if(random_position_cloud_x > 500){
+                        random_position_cloud_x = Math.floor(Math.random()*400)+150;
+                        nube.style.transform = "translateX(-"+random_position_cloud_x+"px)";
+                    }
+                    else{
+                        nube.style.transform = "translateX("+random_position_cloud_x+"px)";
+                    }
+                }else{
+                    if(random_position_cloud_x > 500){
+                        random_position_cloud_x = Math.floor(Math.random()*400)+150;
+                        nube.style.transform = "translateX("+random_position_cloud_x+"px)";
+                    }
+                    else{
+                        nube.style.transform = "translateX(-"+random_position_cloud_x+"px)";
+                    }
+                }
+            }
+            
+
+            if(aux > 2){
+                ban = 0;
+                while(ban != 1){
+                    if(random_position_cloud_x > 400){
+                        random_position_cloud_x = Math.floor(Math.random()*200)+150;
+                    }
+                    else{
+                        nube.style.transform = "translateY(+"+random_position_cloud_x+"px)";
+                        console.log('position Y');
+                        aux = 0;
+                        ban = 1;
+                    }
+                }
             }
 
- 
-        
-            if(aux>3){
-                nube.style.transform = "translateY("+random_position_cloud_y+"px)";
-                aux = 0;
-            }
+            aux += 1;
+            console.log('aux:'+aux);
         }
-        console.log(aleatorio);
     </script>
 </body>
 </html>
